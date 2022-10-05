@@ -1,0 +1,41 @@
+.weather {
+  margin-top: 20px;
+  border: 1px solid rgb(183, 183, 183);
+  border-radius: 6px;
+  align-items: center;
+  max-width: 800px;
+}
+.search {
+  padding-top: 20px;
+}
+.city {
+  font-size: 38px;
+  color: white;
+  font-weight: bold;
+}
+.description {
+  font-size: 18px;
+  color: white;
+}
+.temperature {
+  font-size: 45px;
+  line-height: 60px;
+  font-weight: bold;
+}
+
+.forecast-temperature {
+  margin-bottom: 10px;
+}
+.forecast-date {
+  margin-top: 10px;
+}
+
+.celsius {
+  position: relative;
+  top: -20px;
+}
+.weahter-icon img {
+  margin-top: 20px;
+  height: 80px;
+  width: 80px;
+}
