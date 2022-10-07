@@ -79,7 +79,7 @@ export default function Weather() {
       </div>
       <small>
         <a href="https://github.com/bracen/weather-react-bracen.git">
-          open-sourced code
+          Open-sourced code
         </a>{" "}
         by Nina Bracen
       </small>
