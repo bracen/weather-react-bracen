@@ -15,7 +15,6 @@ export default function Weather() {
     maxTemperature: 18,
   };
   return (
-    <div className="container">
       <div className="weather">
         <div className="card-body">
           <form className="search text-center">
@@ -77,16 +76,6 @@ export default function Weather() {
           <div className="forecast text-center px-5 pt-2"></div>
         </div>
       </div>
-      <small>
-        <a
-          href="https://github.com/bracen/weather-react-bracen.git"
-          rel="noreferrer"
-          target="_blank"
-        >
-          Open-sourced code
-        </a>{" "}
-        by Nina Bracen
-      </small>
-    </div>
+     
   );
 }

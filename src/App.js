@@ -6,7 +6,19 @@ import "./Weather.css";
 export default function App() {
   return (
     <div className="App">
-      <Weather />
+      <div className="container">
+        <Weather />
+      </div>
+      <small>
+        <a
+          href="https://github.com/bracen/weather-react-bracen.git"
+          rel="noreferrer"
+          target="_blank"
+        >
+          Open-sourced code
+        </a>{" "}
+        by Nina Bracen
+      </small>
     </div>
   );
 }
