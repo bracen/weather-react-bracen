@@ -18,8 +18,7 @@ button {
   border-radius: 5px;
 }
 .container.small {
-  
-background: linear-gradient(#a7c4db, #9198e5);
+background: linear-gradient(rgb(105, 118, 233), rgb(118, 176, 179));
   width: 92%;
   margin-top: 5px;
   border-radius: 5px;

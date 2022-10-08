@@ -2,4 +2,9 @@
   display: block;
   align-content: center;
   text-align: center;
+   max-width: 800px;
+   margin:0 auto
+}
+.App small{
+  text-align: center;
 }

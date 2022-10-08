@@ -1,9 +1,9 @@
 .weather {
+  background: linear-gradient(rgb(105, 118, 233), rgb(163, 234, 237));
   margin-top: 20px;
-  border: 1px solid rgb(183, 183, 183);
   border-radius: 6px;
   align-items: center;
-  max-width: 800px;
+ 
 }
 .search {
   padding-top: 15px;
