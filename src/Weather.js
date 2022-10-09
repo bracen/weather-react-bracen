@@ -3,37 +3,45 @@ import axios from "axios";
 import "./styles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-export default function Weather() {
-const[temperature, setTemperature]=useState("");
-const[loaded, setloaded]=useState(false);
+export default function Weather(props) {
+const[weatherData, setWeatherData]=useState({loaded:false});
+const[city, setCity]=useState(props.defaultCity);
 
-
- 
 
   function handleResponse(response){
-    setTemperature(response.data.main.temp)
-  }
-
-  let weatherData = {
-    city: "Paris",
-    temperature: 15,
+    setWeatherData({
+    loaded:true,
+    city: response.data.name,
+    temperature: response.data.main.temp,
     date: "Tuesday 05:11 pm",
-    description: "Sunny",
+    description: response.data.main.weather[0].description,
     imgUrl: "https://ssl.gstatic.com/onebox/weather/64/sunny.png",
-    humidity: 5,
-    wind: 10,
+    humidity: response.data.main.humidity,
+    wind: response.data.wind.speed,
     minTemperature: 10,
     maxTemperature: 18,
-  };
+    });
+
+  }
+  function updateCity(event){
+    setCity(event.target.value);
+  }
+
+  function handleSubmit(event){
+    event.preventDefault();
+    const key = "7aa24630d378d5abf1d82ac33ae578d1";
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
+  }
   
-    if(loaded){return (
+    if(weatherData.loaded){return (
       <div className="weather">
         <div className="card-body">
-          <form className="search text-center">
+          <form className="search text-center" onSubmit={handleSubmit}>
             <input
               className="search-input"
               type="text"
-              placeholder="search for a city"
+              placeholder="search for a city" onChange={updateCity}
             />
             <input type="submit" value="search" className="button" />
           </form>
@@ -74,7 +82,7 @@ const[loaded, setloaded]=useState(false);
                 <ul>
                   <li>
                     <span className="temperature">
-                      {temperature}
+                      {weatherData.temperature}
                     </span>
                     <span className="celsius">℃</span>
                   </li>
@@ -91,11 +99,9 @@ const[loaded, setloaded]=useState(false);
           <div className="forecast text-center px-5 pt-2"></div>
         </div>
       </div>
-    );} else{ let city = "Paris";
-  const key = "7aa24630d378d5abf1d82ac33ae578d1";
-  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`;
-  axios.get(apiUrl).then(handleResponse);
-  setloaded(true);
+    );} else{ handleSubmit();
+      return "Loading.."
+
 
     }
 
