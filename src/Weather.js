@@ -1,47 +1,52 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./styles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function Weather(props) {
-const[weatherData, setWeatherData]=useState({loaded:false});
-const[city, setCity]=useState(props.defaultCity);
+  const [weatherData, setWeatherData] = useState({ loaded: false });
+  const [city, setCity] = useState(props.defaultCity);
 
-
-  function handleResponse(response){
+  function handleResponse(response) {
     setWeatherData({
-    loaded:true,
-    city: response.data.name,
-    temperature: response.data.main.temp,
-    date: "Tuesday 05:11 pm",
-    description: response.data.main.weather[0].description,
-    imgUrl: "https://ssl.gstatic.com/onebox/weather/64/sunny.png",
-    humidity: response.data.main.humidity,
-    wind: response.data.wind.speed,
-    minTemperature: 10,
-    maxTemperature: 18,
+      loaded: true,
+      city: response.data.name,
+      temperature: response.data.main.temp,
+      date: "Tuesday 05:11 pm",
+      description: response.data.main.weather[0].description,
+      imgUrl: "https://ssl.gstatic.com/onebox/weather/64/sunny.png",
+      humidity: response.data.main.humidity,
+      wind: response.data.wind.speed,
+      minTemperature: 10,
+      maxTemperature: 18,
     });
-
   }
-  function updateCity(event){
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
+
+  function updateCity(event) {
     setCity(event.target.value);
   }
 
-  function handleSubmit(event){
-    event.preventDefault();
+  function search() {
     const key = "7aa24630d378d5abf1d82ac33ae578d1";
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`;
     axios.get(apiUrl).then(handleResponse);
   }
-  
-    if(weatherData.loaded){return (
+
+  if (weatherData.loaded) {
+    return (
       <div className="weather">
         <div className="card-body">
           <form className="search text-center" onSubmit={handleSubmit}>
             <input
               className="search-input"
               type="text"
-              placeholder="search for a city" onChange={updateCity}
+              placeholder="search for a city"
+              onChange={updateCity}
             />
             <input type="submit" value="search" className="button" />
           </form>
@@ -99,10 +104,9 @@ const[city, setCity]=useState(props.defaultCity);
           <div className="forecast text-center px-5 pt-2"></div>
         </div>
       </div>
-    );} else{ handleSubmit();
-      return "Loading.."
-
-
-    }
-
+    );
+  } else {
+    search();
+    return "Loading..";
+  }
 }
