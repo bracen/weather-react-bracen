@@ -21,12 +21,12 @@ export default function Weather() {
           <input
             className="search-input"
             type="text"
-            placeholder="🔎 serach for a city"
-            autoFocus="on"
+            placeholder="🔎 search for a city"
+        
           />
           <input type="submit" value="search" />
         </form>
-        <div className="container w-90 small p-4 my-4 border">
+        <div className="container w-90 small p-4 my-4">
           <div className="row city">
             <div className="col-sm pt-4 text-center">
               <span className="city">{weatherData.city}</span>
