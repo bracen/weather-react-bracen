@@ -41,7 +41,7 @@ background: linear-gradient(rgba(121, 121, 121, 0.2), rgba(128, 126, 126, 0.2));
   margin-top: 10px;
 }
 
-.celsius {
+.unit{
   position: relative;
   top: -20px;
 }

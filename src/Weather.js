@@ -1,30 +1,33 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./styles.css";
+import "./Weather.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import WeatherInfo from "./WeatherInfo";
 
 export default function Weather(props) {
-  const [weatherData, setWeatherData] = useState({ loaded: false });
+  const [weatherData, setWeatherData] = useState({});
   const [city, setCity] = useState(props.defaultCity);
+  const [ready, setReady] = useState(false);
 
   function handleResponse(response) {
+    setReady(true);
     setWeatherData({
-      loaded: true,
       city: response.data.name,
       temperature: response.data.main.temp,
-      date: "Tuesday 05:11 pm",
+      date: new Date(response.data.dt * 1000),
       description: response.data.main.weather[0].description,
       imgUrl: "https://ssl.gstatic.com/onebox/weather/64/sunny.png",
       humidity: response.data.main.humidity,
       wind: response.data.wind.speed,
-      minTemperature: 10,
-      maxTemperature: 18,
+      minTemperature: response.data.main.temp_min,
+      maxTemperature: response.data.main.temp_max,
     });
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    search();
+    setReady(search);
   }
 
   function updateCity(event) {
@@ -37,7 +40,7 @@ export default function Weather(props) {
     axios.get(apiUrl).then(handleResponse);
   }
 
-  if (weatherData.loaded) {
+  if (ready) {
     return (
       <div className="weather">
         <div className="card-body">
@@ -50,63 +53,11 @@ export default function Weather(props) {
             />
             <input type="submit" value="search" className="button" />
           </form>
-          <div className="container w-90 small p-4 my-4">
-            <div className="row city">
-              <div className="col-sm pt-4 text-center">
-                <span className="city">{weatherData.city}</span>
-                <br />
-                <ul>
-                  <li>{weatherData.date}</li>
-                  <li>
-                    <span className="description">
-                      {weatherData.description}
-                    </span>
-                  </li>
-                </ul>
-              </div>
-              <div className="col-sm">
-                <span className="weahter-icon">
-                  <img
-                    src="https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png"
-                    alt="Sunny"
-                  />
-                </span>
-                <br />
-                <ul>
-                  <li>
-                    {" "}
-                    <span className="low-high-temp">
-                      L: {weatherData.minTemperature}° | H:{" "}
-                      {weatherData.maxTemperature}
-                    </span>
-                    °{" "}
-                  </li>
-                </ul>
-              </div>
-              <div class="col-sm pt-4">
-                <ul>
-                  <li>
-                    <span className="temperature">
-                      {weatherData.temperature}
-                    </span>
-                    <span className="celsius">℃</span>
-                  </li>
-                  <li>
-                    Wind: <span>{weatherData.wind}</span> km/h
-                  </li>
-                  <li>
-                    Humidity: <span>{weatherData.humidity}</span> %
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div className="forecast text-center px-5 pt-2"></div>
+          <WeatherInfo data={weatherData} />
         </div>
       </div>
     );
   } else {
-    search();
-    return "Loading..";
+    return search();
   }
 }
