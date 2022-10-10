@@ -6,17 +6,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import WeatherInfo from "./WeatherInfo";
 
 export default function Weather(props) {
-  const [weatherData, setWeatherData] = useState({});
+  const [weatherData, setWeatherData] = useState({ready:false});
   const [city, setCity] = useState(props.defaultCity);
-  const [ready, setReady] = useState(false);
 
   function handleResponse(response) {
-    setReady(true);
     setWeatherData({
+      ready:true,
       city: response.data.name,
       temperature: response.data.main.temp,
       date: new Date(response.data.dt * 1000),
-      description: response.data.main.weather[0].description,
       imgUrl: "https://ssl.gstatic.com/onebox/weather/64/sunny.png",
       humidity: response.data.main.humidity,
       wind: response.data.wind.speed,
@@ -27,7 +25,7 @@ export default function Weather(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    setReady(search);
+    search();
   }
 
   function updateCity(event) {
@@ -40,7 +38,7 @@ export default function Weather(props) {
     axios.get(apiUrl).then(handleResponse);
   }
 
-  if (ready) {
+  if (weatherData.ready) {
     return (
       <div className="weather">
         <div className="card-body">
