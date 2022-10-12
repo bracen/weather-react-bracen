@@ -1,24 +1,15 @@
 .weather {
   background: linear-gradient(rgb(105, 118, 233), rgb(163, 234, 237));
-
   margin-top: 20px;
   border-radius: 6px;
   align-items: center;
  
-}
-.container.small {
-background: linear-gradient(rgba(121, 121, 121, 0.2), rgba(128, 126, 126, 0.2));
-
-  width: 92%;
-  margin-top: 5px;
-  border-radius: 5px;
 }
 .search {
   padding-top: 15px;
 }
 .city {
   font-size: 38px;
-  font-weight: 80px;
   color: white;
   font-weight: bold;
 }

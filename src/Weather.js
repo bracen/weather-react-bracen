@@ -6,12 +6,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import WeatherInfo from "./WeatherInfo";
 
 export default function Weather(props) {
-  const [weatherData, setWeatherData] = useState({ready:false});
+  const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState(props.defaultCity);
 
   function handleResponse(response) {
     setWeatherData({
-      ready:true,
+      ready: true,
       city: response.data.name,
       temperature: response.data.main.temp,
       date: new Date(response.data.dt * 1000),

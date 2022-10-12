@@ -17,7 +17,12 @@ button {
   padding: 5px;
   border-radius: 5px;
 }
-
+.container.small {
+background: linear-gradient(rgb(105, 118, 233), rgb(118, 176, 179));
+  width: 92%;
+  margin-top: 5px;
+  border-radius: 5px;
+}
 li:first-letter {
   text-transform: capitalize;
 }
